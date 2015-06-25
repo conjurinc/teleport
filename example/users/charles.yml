@@ -1,2 +1,4 @@
-gidNumber: 5000
+primaryGroup: users
+groups: 
+- scientists
 uidNumber: 1101

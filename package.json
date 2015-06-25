@@ -1,0 +1,19 @@
+{
+  "name": "conjur-portal",
+  "version": "0.1.0",
+  "dependencies": {
+  	"ldapjs": "latest",
+   	"optimist": "0.4.0",
+   	"async": "0.2.8",
+   	"underscore": "1.4.4",
+   	"winston": "0.7.1"
+   },
+   "devDependencies": {
+     "node-uuid": "latest",
+     "gently": "latest",
+     "mocha": "latest",
+     "coffee-script": "latest",
+     "jscs": "~> 1.10.0",
+     "jshint": "~> 2.6.0"
+   }
+}

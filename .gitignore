@@ -1,0 +1,6 @@
+npm-debug.log
+.vagrant
+reports
+test.log
+test-result.xml
+node_modules

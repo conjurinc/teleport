@@ -62,4 +62,28 @@ The YAML file contains additional data:
 
 * **gidNumber** Unix gid number
 
+# Developpment
 
+Install dependencies:
+
+```
+$ npm install
+``
+
+Install `nodemon` for automatic code reloading:
+
+```
+$ npm install -g nodemon
+```
+
+Run the LDAP server:
+
+```
+$ env LDAP_LAYER_DEV_PASSWORD=foobar nodemon ./ldap.js --directory example
+```
+
+In a second terminal, bind as the `dev` layer and show the server status:
+
+```
+$ ldapsearch -H ldap://localhost:1389 -b "cn=default,ou=status,o=teleport" -D "cn=dev,ou=layer,o=teleport" -w foobar "objectclass=*"
+```

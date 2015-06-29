@@ -10,6 +10,7 @@
    	"winston": "latest",
    	"chokidar": "latest",
    	"cb": "latest",
+    "crypto-cacerts": "git+https://github.com/dividedmind/crypto-cacerts.git#3caf62f278392e4c4420f7c704b9c5611800e2c4",
    	"js-yaml": "latest"
    },
    "devDependencies": {

@@ -3,7 +3,7 @@ require 'tempfile'
 module LDAPWorld
   def ldapsearch(options={})
     layer = options[:cn] || 'dev'
-    bind = options[:bind] || "cn=#{layer},ou=layer,o=teleport"
+    bind = options[:bind] || "cn=#{layer},ou=layers,o=teleport"
     pw = options[:pw] || 'the-dev-password'
     search_base = options[:search_base] || "cn=default,ou=status,o=teleport"
     query = options[:query] || "objectclass=*"

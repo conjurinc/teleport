@@ -1,5 +1,5 @@
 {
-  "name": "conjur-portal",
+  "name": "conjur-teleport",
   "version": "0.1.0",
   "dependencies": {
     "ldapjs": "latest",

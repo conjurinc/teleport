@@ -85,5 +85,5 @@ $ env LDAP_LAYER_DEV_PASSWORD=foobar nodemon ./ldap.js --directory example
 In a second terminal, bind as the `dev` layer and show the server status:
 
 ```
-$ ldapsearch -H ldap://localhost:1389 -b "cn=default,ou=status,o=teleport" -D "cn=dev,ou=layer,o=teleport" -w foobar "objectclass=*"
+$ ldapsearch -H ldap://localhost:1389 -b "cn=default,ou=status,o=teleport" -D "cn=dev,ou=layers,o=teleport" -w foobar "objectclass=*"
 ```

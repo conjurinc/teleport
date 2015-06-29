@@ -13,3 +13,7 @@ end
 Then(/^it succeeds$/) do
   step "the exit status should be 0"
 end
+
+When(/^I list all the users$/) do
+  ldapsearch search_base: "ou=users,o=teleport"
+end

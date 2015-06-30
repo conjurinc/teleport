@@ -1,13 +1,14 @@
 {
   "name": "conjur-teleport",
   "version": "0.1.0",
+  "repository": "https://github.com/conjurinc/teleport",
   "dependencies": {
     "ldapjs": "latest",
     "express": "latest",
    	"optimist": "latest",
    	"async": "latest",
    	"underscore": "latest",
-   	"winston": "latest",
+   	"bunyan": "latest",
    	"chokidar": "latest",
    	"cb": "latest",
     "crypto-cacerts": "git+https://github.com/dividedmind/crypto-cacerts.git#3caf62f278392e4c4420f7c704b9c5611800e2c4",

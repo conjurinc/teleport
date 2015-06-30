@@ -4,7 +4,6 @@ if ( fs.existsSync('/etc/ssl/certs') )
   require('crypto-cacerts').cryptoPatch('/etc/ssl/certs');
 
 var each = require('underscore').each,
-	info = require('winston').info,
 	format = require('util').format,
 	assert = require('assert')
 	;
@@ -13,6 +12,7 @@ var optimist = require('optimist')
   .default('directory', 'data')
   .default('key')
   .default('certificate')
+  .default('log-level', 'info')
   .default('ca')
   .default('port');
 var argv = optimist.argv;
@@ -21,6 +21,13 @@ if (argv.help) {
   optimist.showHelp();
   process.exit(0);
 }
+
+var logLevel;
+if ( logLevel = argv['log-level'] ) {
+	require('./lib/logging').initializeLogging({level: logLevel})
+}
+
+var log = require('./lib/logging').logLDAP;
 
 var options = {};
 each(['key', 'certificate'], function(k) {
@@ -40,19 +47,19 @@ if ( !argv.port ) {
 
 if ( argv.ca ) {
   var opts = require('https').globalAgent.options;
-  info(format("Using CA %s", argv.ca))
+  log.info({ca: argv.ca})
   opts.ca = fs.readFileSync(argv.ca, 'utf8');
 }
 
 require('./lib/dataStore').initialize(argv.directory, function(err) {
 	if ( err ) {
-		console.warn(err);
+		log.fatal(err);
 		return process.exit(1);
 	}
 	var server = require('./lib/ldap')(options);
 	var port = parseInt(argv.port);
 
 	server.listen(port, function() {
-	  info('LDAP server listening at: ' + server.url);
+	  log.info({url: server.url}, 'LDAP server listening at: %s', server.url);
 	});
 });

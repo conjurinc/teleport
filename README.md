@@ -80,24 +80,51 @@ That's it! Why should SSH configuration be any harder?
 
 Install dependencies:
 
-```
+```sh-session
 $ npm install
-``
+```
 
 Install `nodemon` for automatic code reloading:
 
-```
+```sh-session
 $ npm install -g nodemon
 ```
 
 Run the LDAP server:
 
-```
+```sh-session
 $ env LDAP_LAYER_DEV_PASSWORD=foobar nodemon ./ldap.js --directory example
 ```
 
-In a second terminal, bind as the `dev` layer and show the server status:
+In a second terminal, bind as the `dev` layer and list the users:
 
-```
-$ ldapsearch -H ldap://localhost:1389 -b "cn=default,ou=status,o=teleport" -D "cn=dev,ou=layers,o=teleport" -w foobar "objectclass=*"
+```sh-session
+$ ldapsearch -LLL -H ldap://localhost:1389 \
+  -b "ou=users,o=teleport" \
+  -D "cn=dev,ou=layers,o=teleport" \
+  -w foobar \
+  "objectclass=*"
+dn: cn=alice,ou=users,o=teleport
+uidNumber: 1100
+uid: alice
+cn: alice
+objectClass: posixAccount
+objectClass: shadowAccount
+gidNumber: 50000
+
+dn: cn=bob,ou=users,o=teleport
+uidNumber: 1101
+uid: bob
+cn: bob
+objectClass: posixAccount
+objectClass: shadowAccount
+gidNumber: 5000
+
+dn: cn=charles,ou=users,o=teleport
+uidNumber: 1102
+uid: charles
+cn: charles
+objectClass: posixAccount
+objectClass: shadowAccount
+gidNumber: 5000
 ```

@@ -38,7 +38,9 @@ Each user's YAML file is named `[username].yml`. Therefore, the name of the file
 * **groups** A list of secondary Unix groups.
 
 Optionally, you can also specify other `posixAccount` and `shadowAccount` fields such as `loginShell` and 
-`homeDirectory`. Here's an example of `alice.yml`:
+`homeDirectory`.
+
+Here's an example: 
 
 ```yaml
 primaryGroup: admins
@@ -48,8 +50,7 @@ uidNumber: 1100
 publicKeys:
 - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9yf0ZKmg0vTPq7FAyAUGr5EBRjJBZM7CBQy9K/1Ryc9cDL6b25d3nVcNNsIa2SYtHvUR8bKeAc6PIEbEdh+aayqCMutRxjRNg4PVb4i7T/OZekziA2Eai4XflNe5RHSPkDk/OcAzP+Q5/4hjyzwoMqTiNsBlXTDCwQaW9nx7q4bSfrQOgMlpERMJVJl3Q/fGQOEI7HFbsetqItUrwmK5Kr0xkCwAk5GyWjN52ADBOMatNEVd+8c7GXzCtM90o+iHAIViUeIUdYajvv7il64kB7tyc+kCjDvvVrgtHRs4RmnlxFxG1EFHyZEfJPX1yJvy8E82FZN7vakJ8nuFlnLRx alice@laptop
 ```
-
-Example: [example/users/alice.yml](https://github.com/conjurinc/teleport/blob/master/example/users/alice.yml)
+[example/users/alice.yml](https://github.com/conjurinc/teleport/blob/master/example/users/alice.yml)
 
 ## Groups
 
@@ -59,14 +60,19 @@ The YAML file contains additional data:
 
 * **gidNumber** Unix gid number
 
-Example: [example/groups/scientists.yml](https://github.com/conjurinc/teleport/blob/master/example/groups/scientists.yml)
+Here's an example: 
+
+```yaml
+gidnumber: 5001
+```
+[example/groups/scientists.yml](https://github.com/conjurinc/teleport/blob/master/example/groups/scientists.yml)
 
 ## Layers
 
 Each layer is represented by a directory. The YAML file of each user that should have access to the layer
 is symlinked into this directory.
 
-Example: [example/groups/scientists.yml](https://github.com/conjurinc/teleport/blob/master/example/layers/dev)
+Example: [example/layers/dev](https://github.com/conjurinc/teleport/blob/master/example/layers/dev)
 
 That's it! Why should SSH configuration be any harder?
 

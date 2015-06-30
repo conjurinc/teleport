@@ -38,3 +38,22 @@ gidNumber: 5000
 numEntries: 3
     """
     And the output should not match /uid: dan/
+
+  Scenario: A single user can be listed by searching on uid
+    When I list user "alice"
+    Then the exit status should be 0
+    And the output should match:
+    """
+dn: cn=alice,ou=users,o=teleport
+uidNumber: 1100
+uid: alice
+cn: alice
+objectClass: posixAccount
+objectClass: shadowAccount
+gidNumber: 50000
+    """
+    And the output should match:
+    """
+numEntries: 1
+    """
+    

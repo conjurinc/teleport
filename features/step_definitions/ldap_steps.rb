@@ -17,3 +17,15 @@ end
 When(/^I list all the users$/) do
   ldapsearch search_base: "ou=users,o=teleport"
 end
+
+When(/^I list user "(.*?)"$/) do |uid|
+  ldapsearch search_base: "uid=#{uid},ou=users,o=teleport"
+end
+
+When(/^I list all the groups$/) do
+  ldapsearch search_base: "ou=groups,o=teleport"
+end
+
+When(/^I search for server default status$/) do
+  ldapsearch search_base: "cn=default,ou=status,o=teleport"
+end

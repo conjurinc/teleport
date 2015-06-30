@@ -1,5 +1,5 @@
 require 'background_process'
-command = "env LDAP_LAYER_DEV_PASSWORD=the-dev-password node ./ldap.js --directory example"
+command = "env LDAP_SORT_MEMBER_UID=true LDAP_LAYER_DEV_PASSWORD=the-dev-password node ./ldap.js --directory example"
 $process = BackgroundProcess.run command  
 sleep 1
 $process_thread = Thread.new do

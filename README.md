@@ -2,31 +2,26 @@
 
 Teleport is an open-source client and server tool for SSH login and access management.
 
-The teleport server provides two services:
+The teleport server provides two back-end services which combine to provide SSH authentication
+("authn") and authorization ("authz"):
 
-* **Public Keys** An HTTP(S) service which makes users' public keys available.
-* **LDAP** An LDAP server which implements `posixAccount`, `shadowAccount`, and `posixGroup`. This 
-functionality is sufficient to hook up Linux PAM for user, shadow, and group information.
+1. **Public Keys** An HTTP(S) service which provides public keys.
+2. **LDAP** An LDAP services which implements LDAP user and group information. 
 
 # Benefits
 
-First, each user logs in using their **own** private SSH key. As a result:
+Each user logs in using their **own private SSH**! As a result:
 
 * You can stop SSH key sharing once and for all, which is not only bad security practice, but also forbidden by 
 every compliance specification.
 * Each user logs in as their own personal account, which is required for compliance, and also allows you to
 manage user and group permissions in the time-honored Unix way.
 
-The LDAP server provides multiple SSH "layers". The user list can be different for each layer, so you can
-maintain `dev` and `prod` layers which are accessible to different people. So:
+The LDAP server provides multiple SSH "layers", each of which can have a different authorized user list.
+For example, you can use layers to maintain `dev` and `prod` environments which are accessible to different 
+sets of people. In this way, you can segment your systems according to their security needs.
 
-* You can segment your systems according to their security needs.
-* You can easily raise or lower user privileges to specific systems.
-
-The LDAP server provides secondary Unix groups in addition to the main "primary" group. 
-Secondary groups:
-
-* Can be used along with `/etc/sudoers.d` to give limited `root` access to specific groups of users.
+In addition to standard Unix fields like uid number, gid number, and login shell, the LDAP server can also provide secondary Unix groups for each user. This feature can be used along with `/etc/sudoers.d` to give limited `root` access to specific groups of users.
 
 # Configuration
 
@@ -54,6 +49,8 @@ publicKeys:
 - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9yf0ZKmg0vTPq7FAyAUGr5EBRjJBZM7CBQy9K/1Ryc9cDL6b25d3nVcNNsIa2SYtHvUR8bKeAc6PIEbEdh+aayqCMutRxjRNg4PVb4i7T/OZekziA2Eai4XflNe5RHSPkDk/OcAzP+Q5/4hjyzwoMqTiNsBlXTDCwQaW9nx7q4bSfrQOgMlpERMJVJl3Q/fGQOEI7HFbsetqItUrwmK5Kr0xkCwAk5GyWjN52ADBOMatNEVd+8c7GXzCtM90o+iHAIViUeIUdYajvv7il64kB7tyc+kCjDvvVrgtHRs4RmnlxFxG1EFHyZEfJPX1yJvy8E82FZN7vakJ8nuFlnLRx alice@laptop
 ```
 
+Example: [example/users/alice.yml](https://github.com/conjurinc/teleport/blob/master/example/users/alice.yml)
+
 ## Groups
 
 Each group has a YAML file named `[groupname].yml`. Again, the name of the file specifies the name of the group.
@@ -62,7 +59,18 @@ The YAML file contains additional data:
 
 * **gidNumber** Unix gid number
 
-# Developpment
+Example: [example/groups/scientists.yml](https://github.com/conjurinc/teleport/blob/master/example/groups/scientists.yml)
+
+## Layers
+
+Each layer is represented by a directory. The YAML file of each user that should have access to the layer
+is symlinked into this directory.
+
+Example: [example/groups/scientists.yml](https://github.com/conjurinc/teleport/blob/master/example/layers/dev)
+
+That's it! Why should SSH configuration be any harder?
+
+# Development
 
 Install dependencies:
 

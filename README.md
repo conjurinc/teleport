@@ -5,12 +5,13 @@ Teleport is an open-source client and server tool for SSH login and access manag
 The teleport server provides two back-end services which combine to provide SSH authentication
 ("authn") and authorization ("authz"):
 
-1. **Public Keys** An HTTP(S) service which provides public keys.
-2. **LDAP** An LDAP services which implements LDAP user and group information. 
+1. **Public Keys** An HTTP(S) service which provides public keys over the network for each user. 
+2. **LDAP** An LDAP service which implements LDAP user and group information, with customizable
+lists of authorized users for each project and/or environment.  
 
 # Benefits
 
-Each user logs in using their **own private SSH**! As a result:
+Each user logs in using their own private SSH key. As a result:
 
 * You can stop SSH key sharing once and for all, which is not only bad security practice, but also forbidden by 
 every compliance specification.

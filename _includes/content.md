@@ -9,10 +9,6 @@ SSH authentication ("authn") and authorization ("authz"):
 2. **LDAP** An LDAP service which implements LDAP user and group information, with customizable lists
 of authorized users for each project and/or environment.
 
-summon is a command-line tool that reads a file in secrets.yml format
-and injects secrets as environment variables into any process. Once the
-process exits, the secrets are gone.
-
 <h1 id="benefits">benefits</h1>
 
 Each user logs in using their own private SSH key. As a result:

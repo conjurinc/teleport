@@ -1,3 +1,5 @@
+_site
+images
 npm-debug.log
 .vagrant
 reports

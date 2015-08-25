@@ -19,12 +19,8 @@ Each user logs in using their own private SSH key. As a result:
 
 * You can stop SSH key sharing once and for all, which is not only bad security practice, but also
 forbidden by every compliance specification.
-* Each user logs in as their own personal account, which is required for compliance, and also allows 
+* Each user logs in as their own personal account, which is required for compliance, and also allows
 you to manage user and group permissions in the time-honored Unix way.
-
-The LDAP server provides multiple SSH "layers", each of which can have a different authorized user
-list. For example, you can use layers to maintain dev and prod environments which are accessible to
-different sets of people. In this way, you can segment your systems according to their security needs.
 
 In addition to standard Unix fields like uid number, gid number, and login shell, the LDAP server can
 also provide secondary Unix groups for each user. This feature can be used along with `/etc/sudoers.d`
@@ -74,13 +70,6 @@ Here's an example:
 gidnumber: 5001
 ```
 [example/groups/scientists.yml](https://github.com/conjurinc/teleport/blob/master/example/groups/scientists.yml)
-
-## layers
-
-Each layer is represented by a directory. The YAML file of each user that should have access to the layer
-is symlinked into this directory.
-
-Example: [example/layers/dev](https://github.com/conjurinc/teleport/blob/master/example/layers/dev)
 
 <p>&nbsp;</p>
 
